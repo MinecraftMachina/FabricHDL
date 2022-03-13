@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "fabrichdl",
+  "version": "${version}",
+
+  "name": "FabricHDL",
+  "description": "FabricHDL is a digital synthesis flow for Minecraft redstone circuits.",
+  "authors": [
+    "itsFrank",
+    "ViRb3"
+  ],
+  "contact": {
+    "sources": "https://github.com/MinecraftMachina/FabricHDL"
+  },
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fabrichdl.FabricHDL"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  }
+}

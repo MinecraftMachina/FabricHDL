@@ -1,10 +1,5 @@
 package minecrafthdl.synthesis;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.Vec3d;
-
-import java.util.HashMap;
-
 /**
  * Created by Francis O'Brien - 3/3/2017 - 9:47 AM
  */

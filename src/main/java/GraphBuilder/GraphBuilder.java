@@ -74,7 +74,7 @@ public class GraphBuilder {
 	public static Graph buildGraph(String path){
 		high_low_nets = Integer.MAX_VALUE;
 
-		Gson gson= new com.google.gson.Gson();
+		Gson gson= new Gson();
 		JsonFile jf = null;
 		try {
 			FileReader fr = new FileReader(path);
@@ -215,7 +215,7 @@ public class GraphBuilder {
 
 
 		//create jsononjects
-		Gson gson= new com.google.gson.Gson();
+		Gson gson= new Gson();
 		JsonFile jf = null;
 		try {
 			FileReader fr = new FileReader(path);

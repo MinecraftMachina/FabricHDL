@@ -4,8 +4,32 @@
 [flow]: https://github.com/itsFrank/MinecraftHDL/blob/master/screenshots/flow.png?raw=true 
  
  
-# Minecraft HDL 
+# Fabric HDL 
  
+Fabric HDL is a Fabric 1.18.2 port of the Forge 1.10.2 mod [Minecraft HDL](https://github.com/itsFrank/MinecraftHDL). The GUI has been removed in favor of a chat command:
+
+```
+/synth <path_to_json_file>
+```
+
+## Installing
+
+Grab the latest version from the releases and install it like any Fabric mod.
+
+> :information_source: [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api) is required.
+
+## Building
+
+Make sure Java 17 is in your PATH. Then, run:
+```
+./gradlew build
+```
+The mod will be built under `build/libs/`.
+
+---
+
+# Minecraft HDL
+
 Minecraft HDL is a digital synthesis flow for minecraft redstone circuits. It is an attempt to use industry standard design tools and methods to generate digital circuits with redstone. 
  
 ### Example: 

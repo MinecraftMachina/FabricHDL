@@ -1,13 +1,13 @@
 package minecrafthdl.synthesis.routing;
 
-import minecrafthdl.Utils;
 import minecrafthdl.synthesis.Circuit;
 import minecrafthdl.synthesis.routing.pins.Pin;
 import minecrafthdl.synthesis.routing.pins.PinPair;
 import minecrafthdl.synthesis.routing.pins.PinsArray;
 import minecrafthdl.synthesis.routing.vcg.VerticalConstraintGraph;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.Blocks;
+import net.minecraft.state.property.Properties;
+import net.minecraft.util.math.Direction;
 
 import java.util.ArrayList;
 
@@ -79,12 +79,12 @@ public class Channel {
                 nets_done.add(n);
 
                 if (n.isOutpath()){
-                    circuit.setBlock(n.x_max, 0, n.trackZ() + 1, Blocks.WOOL.getDefaultState());
+                    circuit.setBlock(n.x_max, 0, n.trackZ() + 1, Blocks.WHITE_WOOL.getDefaultState());
                     circuit.setBlock(n.x_max, 1, n.trackZ() + 1, Blocks.REDSTONE_WIRE.getDefaultState());
                 }
 
                 if (n.out_partner != null && !n.isOutpath()){
-                    circuit.setBlock(n.x_max, 0, n.trackZ() - 1, Blocks.WOOL.getDefaultState());
+                    circuit.setBlock(n.x_max, 0, n.trackZ() - 1, Blocks.WHITE_WOOL.getDefaultState());
                     circuit.setBlock(n.x_max, 1, n.trackZ() - 1, Blocks.REDSTONE_WIRE.getDefaultState());
                 }
 
@@ -241,16 +241,16 @@ public class Channel {
         int z_track = z_min + 1;
 
         for (int x = xmin; x <= xmax; x++){
-            channel.setBlock(x, 1, z_track, Blocks.WOOL.getDefaultState());
+            channel.setBlock(x, 1, z_track, Blocks.WHITE_WOOL.getDefaultState());
             channel.setBlock(x, 2, z_track, Blocks.REDSTONE_WIRE.getDefaultState());
         }
 
         for (Pin p : pins){
             if (p.top) {
-                channel.setBlock(p.xPos(), 0, z_min, Blocks.WOOL.getDefaultState());
+                channel.setBlock(p.xPos(), 0, z_min, Blocks.WHITE_WOOL.getDefaultState());
                 channel.setBlock(p.xPos(), 1, z_min, Blocks.REDSTONE_WIRE.getDefaultState());
             } else {
-                channel.setBlock(p.xPos(), 0, z_track + 1, Blocks.WOOL.getDefaultState());
+                channel.setBlock(p.xPos(), 0, z_track + 1, Blocks.WHITE_WOOL.getDefaultState());
                 channel.setBlock(p.xPos(), 1, z_track + 1, Blocks.REDSTONE_WIRE.getDefaultState());
             }
         }
@@ -282,35 +282,35 @@ public class Channel {
             if (p.top) {
                 if (n.trackZ() > 10) {
                     for (int z = n.trackZ() - 10; z > -1; z -= 10){
-                        channel.setBlock(p.xPos(), 0, z, Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.NORTH));
+                        channel.setBlock(p.xPos(), 0, z, Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
                     }
                 }
 
                 if (p.xPos() > n.x_min) {
-                    channel.setBlock(p.xPos() - 1, 2, n.trackZ(), Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.EAST));
+                    channel.setBlock(p.xPos() - 1, 2, n.trackZ(), Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST));
                 }
 
                 if (p.xPos() < n.x_max) {
-                    channel.setBlock(p.xPos() + 1, 2, n.trackZ(), Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.WEST));
+                    channel.setBlock(p.xPos() + 1, 2, n.trackZ(), Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST));
                 }
             } else {
                 if (channel.getSizeZ() - n.trackZ() > 10) {
                     for (int z = n.trackZ() + 3; z < channel.getSizeZ(); z += 10){
-                        channel.setBlock(p.xPos(), 0, z, Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.NORTH));
+                        channel.setBlock(p.xPos(), 0, z, Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
                     }
                 }
                 if (!(!n.outpath && n.out_partner != null)) {
                     if (p.xPos() > n.x_min) {
                         if (p.xPos() > n.top_pin.xPos())
-                            channel.setBlock(p.xPos() - 1, 2, n.trackZ(), Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.WEST));
+                            channel.setBlock(p.xPos() - 1, 2, n.trackZ(), Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST));
                     }
 
                     if (p.xPos() < n.x_max) {
                         if (p.xPos() < n.top_pin.xPos())
-                            channel.setBlock(p.xPos() + 1, 2, n.trackZ(), Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.EAST));
+                            channel.setBlock(p.xPos() + 1, 2, n.trackZ(), Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST));
                     }
                 } else {
-                    channel.setBlock(p.xPos() + 1, 2, n.trackZ(), Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.EAST));
+                    channel.setBlock(p.xPos() + 1, 2, n.trackZ(), Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST));
                 }
             }
         }
@@ -323,11 +323,11 @@ public class Channel {
 
                 if (!(!n.outpath && n.out_partner != null)) {
                     if (x < n.top_pin.xPos())
-                        channel.setBlock(x, 2, n.trackZ(), Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.EAST));
+                        channel.setBlock(x, 2, n.trackZ(), Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST));
                     if (x > n.top_pin.xPos())
-                        channel.setBlock(x, 2, n.trackZ(), Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.WEST));
+                        channel.setBlock(x, 2, n.trackZ(), Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST));
                 } else {
-                    channel.setBlock(x, 2, n.trackZ(), Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.EAST));
+                    channel.setBlock(x, 2, n.trackZ(), Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST));
                 }
             }
         }
@@ -335,15 +335,15 @@ public class Channel {
         if (n.isOutpath()){
             if (n.out_partner.trackZ() - n.trackZ() > 14) {
                 for (int z = n.trackZ() + 3; z < n.out_partner.trackZ() - 2; z += 13){
-                    channel.setBlock(n.x_max, 0, z, Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.NORTH));
+                    channel.setBlock(n.x_max, 0, z, Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
                 }
             }
 
-            channel.setBlock(n.x_max - 1, 2, n.trackZ(), Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.WEST));
+            channel.setBlock(n.x_max - 1, 2, n.trackZ(), Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.WEST));
         }
 
         if (!n.isOutpath() && n.out_partner != null){
-            channel.setBlock(n.x_max - 1, 2, n.trackZ(), Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.EAST));
+            channel.setBlock(n.x_max - 1, 2, n.trackZ(), Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST));
 
         }
     }

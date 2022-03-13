@@ -2,16 +2,16 @@ package minecrafthdl.synthesis;
 
 import MinecraftGraph.*;
 import minecrafthdl.MHDLException;
-import minecrafthdl.Utils;
 import minecrafthdl.synthesis.routing.Channel;
 import minecrafthdl.synthesis.routing.Net;
 import minecrafthdl.synthesis.routing.Router;
 import minecrafthdl.synthesis.routing.pins.GatePins;
 import minecrafthdl.synthesis.routing.pins.PinsArray;
 import minecrafthdl.testing.TestLogicGates;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.Blocks;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -238,7 +238,8 @@ public class IntermediateCircuit {
 
                 if (g.getSizeZ() - 1 < layers_size_z[i]) {
                     for (int z = g.getSizeZ(); z < layers_size_z[i]; z++){
-                        if (z == layers_size_z[i] - 1) circuit.setBlock(x_offset, 0, z_offset + z, Blocks.UNPOWERED_REPEATER.getDefaultState().withProperty(Utils.getPropertyByName(Blocks.UNPOWERED_REPEATER, "facing"), EnumFacing.NORTH));
+                        if (z == layers_size_z[i] - 1) circuit.setBlock(x_offset, 0, z_offset + z, Blocks.REPEATER.getDefaultState().with(
+                                Properties.HORIZONTAL_FACING, Direction.NORTH));
                         else circuit.setBlock(x_offset, 0, z_offset + z, Blocks.REDSTONE_WIRE.getDefaultState());
                     }
                 }
