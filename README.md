@@ -9,7 +9,7 @@
 Fabric HDL is a Fabric 1.18.2 port of the Forge 1.10.2 mod [Minecraft HDL](https://github.com/itsFrank/MinecraftHDL). The GUI has been removed in favor of a chat command:
 
 ```
-/synth <path_to_json_file>
+/synth <path_to_netlist_json_file>
 ```
 
 ## Installing

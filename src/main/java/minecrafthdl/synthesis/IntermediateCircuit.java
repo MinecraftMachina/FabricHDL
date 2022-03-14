@@ -297,6 +297,8 @@ public class IntermediateCircuit {
             return Circuit.TEST? TestLogicGates.IO() : LogicGates.LOW();
         }else if ( getFunctionType(v) == FunctionType.D_LATCH){
             return Circuit.TEST? TestLogicGates.IO() : LogicGates.D_LATCH();
+        }else if ( getFunctionType(v) == FunctionType.D_FLIP_FLOP){
+            return Circuit.TEST? TestLogicGates.IO() : LogicGates.D_FLIP_FLOP();
         }
         else throw new MHDLException("NO SUCH GATE AVAILABLE");
     }

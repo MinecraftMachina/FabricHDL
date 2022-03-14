@@ -270,4 +270,22 @@ public class LogicGates {
 
         return gate;
     }
+
+    public static Gate D_FLIP_FLOP() {
+        Gate gate = new Gate(3, 1, 4, 2, 1, 1, 0, new int[]{2});
+
+        gate.setBlock(2, 0, 0, Blocks.REDSTONE_WIRE.getDefaultState());
+        gate.setBlock(2, 0, 1, Blocks.WHITE_WOOL.getDefaultState());
+        gate.setBlock(2, 0, 2, Blocks.REDSTONE_WALL_TORCH.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.SOUTH));
+
+        gate.setBlock(1, 0, 1, Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST));
+        gate.setBlock(1, 0, 2, Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.EAST));
+
+        gate.setBlock(0, 0, 0, Blocks.REDSTONE_WIRE.getDefaultState());
+        gate.setBlock(0, 0, 1, Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
+        gate.setBlock(0, 0, 2, Blocks.REPEATER.getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
+        gate.setBlock(0, 0, 3, Blocks.REDSTONE_WIRE.getDefaultState());
+
+        return gate;
+    }
 }

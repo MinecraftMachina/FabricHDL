@@ -755,6 +755,9 @@ public class GraphBuilder {
 		}else if(type.contains("dlatch_p")||type.contains("DLATCH_P")) {
 			return FunctionType.D_LATCH;
 
+		}else if(type.toLowerCase().contains("dff")) {
+			return FunctionType.D_FLIP_FLOP;
+
 		}else if(type.contains("not")||type.contains("NOT")){
 				return FunctionType.INV;
 

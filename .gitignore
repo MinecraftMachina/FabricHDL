@@ -12,6 +12,8 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/runConfigurations/
+.metals/
 
 # AWS User-specific
 .idea/**/aws.xml
